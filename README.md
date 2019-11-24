@@ -1,5 +1,6 @@
-# euler-population-growth-rate
-Euler Population Growth Rate with Python / Tingkat Pertumbuhan Penduduk Metode Euler, dengan Python 
+# population-growth-rate
+
+Method (Euler & Runge Kutta 2 )  Population Growth Rate with Python / Tingkat Pertumbuhan Penduduk ,dengan Python.
 
 [Mata Kuliah Pemodelan dan Simulasi]
 
