@@ -3,57 +3,42 @@
 # https://github.com/albirrkarim/
 # http://prajanto.blog.dinus.ac.id/courses/modeling-and-simulation/
 
-# ----------------------- Euler Method ----------------------
+# ------------------------ Runge Kutta 2 ------------------------
+
 
 from tabulate import tabulate
 import numpy as np
 import time
 start_time = time.time()
 
-
-# Description
-# Growth Function
-
-    # dP / dt = P * r
-
-# Death Function
-
-    # dD / dt = (r * P / M) *P
-
-# M = region capacity
-
-# Delta P = Growth  - Death
-
-# Delta t = 0.5
-
 # Input & Initialize
 
-firstPopulation = 100.0
+firstPopulation = 100
 growthRate      = 0.1
-M               = 500.0
 deltaT          = 0.5
 
 def GrowthFunc(b):
     return growthRate*b
 
 population      = firstPopulation
-
 results=[]
-
 deltaP=0.0
 
 # Process
+
 for t in np.arange(0, 10, deltaT):
-    population=population+(deltaP*deltaT)
+    population  += (deltaP*deltaT)
 
-    growth=GrowthFunc(population)
+    # a = F(tn,pn)
+    # b = yn+1
+    # c = F(tn,yn+1)
 
-    death=growth*(population/M)
+    a       =  GrowthFunc(population)
+    b       =  population+(a*deltaT)
+    c       =  GrowthFunc(b)
+    deltaP  =  (a+c)/2
 
-    deltaP=growth-death
-
-    results.append((t,population,growth,death,deltaP))
-
+    results.append((t,population,a,b,c,deltaP))
 
 
 # Measure Time & Heap Memory
@@ -70,6 +55,5 @@ from guppy import hpy
 h = hpy()
 print (h.heap())
 
-
 # Output
-print(tabulate(results,headers=["t","P(t)","r*P","r*P/M*P","deltaP"],tablefmt="fancy_grid"))
+print(tabulate(results,headers=["tn","Pn","F(tn,pn)","yn+1","F(tn,yn+1)","deltaP"],tablefmt="fancy_grid"))
