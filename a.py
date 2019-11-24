@@ -32,8 +32,6 @@ population      = firstPopulation
 results=[]
 
 deltaP=0.0
-pembulatan=2
-
 # Process
 for t in np.arange(0, 5.5, 0.5):
     population=population+(deltaP*deltaT)
